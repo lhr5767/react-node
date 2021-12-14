@@ -2,6 +2,23 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Customer from './components/Customer';
+import { Table } from '@material-ui/core/';
+import { TableHead } from '@material-ui/core/';
+import { TableBody } from '@material-ui/core/';
+import { TableRow } from '@material-ui/core/';
+import { TableCell } from '@material-ui/core/';
+import { withStyles } from '@material-ui/styles';
+import { Paper } from '@material-ui/core';
+
+const styles = theme => ({
+  root: {
+    width : '100%',
+    overflowX: "auto"
+  },
+  table: {
+    minWidth: 1080
+  }
+})
 
 const customers  = [{
   'id' : '1',
@@ -32,8 +49,21 @@ const customers  = [{
 
 class App extends Component {
   render() {
+    const {classes} = this.props;
   return (
-    <div>
+    <Paper className={classes.root}>
+      <Table className={classes.table}>
+        <TableHead>
+            <TableRow>
+              <TableCell>번호</TableCell>
+              <TableCell>이미지</TableCell>
+              <TableCell>이름</TableCell>
+              <TableCell>생년월일</TableCell>
+              <TableCell>성별</TableCell>
+              <TableCell>직업</TableCell>
+            </TableRow>
+          </TableHead>
+        <TableBody>
       {
         customers.map( c => {
           return (
@@ -49,11 +79,13 @@ class App extends Component {
           )
         })
       }
+       </TableBody>
+      </Table>
 
-    </div>
+    </Paper>
    );
   }
 }
 
-export default App;
+export default withStyles(styles) (App);
 
